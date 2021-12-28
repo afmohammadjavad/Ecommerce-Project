@@ -18,13 +18,15 @@ function ProductList() {
 
   if (data.length) {
     return (
-      <Row justify="center" gutter={[32, 16]}>
-        {data.map((item) => (
-          <Col xs={24} md={12} lg={6} key={item.id} style={{display: 'flex', justifyContent: 'center'}}>
-            <ProductCard item={item} />
-          </Col>
-        ))}
-      </Row>
+      <div style={{padding: '20px 80px'}}>
+        <Row justify="center" gutter={[160, 16]}>
+          {data.map((item) => (
+            <Col xs={24} md={12} lg={6} key={item.id} style={{display: 'flex', justifyContent: 'center'}}>
+              <ProductCard item={item} />
+            </Col>
+          ))}
+        </Row>
+      </div>
     );
   }
 }

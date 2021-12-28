@@ -20,7 +20,7 @@ function ProductCard({ item }) {
           <Button type="primary" onClick={() => dispatch({type: actionTypes.ADD_TO_BASKET, payload: item})}>Add to Cart</Button>,
         ]}
       >
-        <Meta title={item.title} description={item.description} />
+        <Meta title={item.title} description={item.price} />
       </Card>
     </div>
   );
