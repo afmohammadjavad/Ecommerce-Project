@@ -6,34 +6,32 @@ const initialState = {
 };
 
 export const ProductBasketReducer = (state = initialState, action) => {
-  // const { id:idx } = action.payload;
+  const id = action?.payload?.id;
 
   switch (action.type) {
     case actionTypes.ADD_TO_BASKET:
-    // let { id } = action.payload;
-
-      if (state.selectedProductsAmount[action.payload.id])
+      if (state.selectedProductsAmount[id])
         return {
           ...state,
           selectedProductsAmount: {
             ...state.selectedProductsAmount,
-            [action.payload.id]: state.selectedProductsAmount[action.payload.id] + 1,
+            [id]: state.selectedProductsAmount[id] + 1,
           },
         };
       else
         return {
           ...state,
           selectedProducts: [...state.selectedProducts, action.payload],
-          selectedProductsAmount: { ...state.selectedProductsAmount, [action.payload.id]: 1 },
+          selectedProductsAmount: { ...state.selectedProductsAmount, [id]: 1 },
         };
 
     case actionTypes.REMOVE_FROM_BASKET:
       const newProductsAmount = {...state.selectedProductsAmount };
-      delete newProductsAmount[action.payload.id];
+      delete newProductsAmount[id];
       return {
         ...state,
         selectedProducts: state.selectedProducts.filter(
-          (item) => item.id !== action.payload.id
+          (item) => item.id !== id
         ),
         selectedProductsAmount: newProductsAmount
       };
