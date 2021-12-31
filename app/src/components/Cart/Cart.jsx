@@ -4,33 +4,26 @@ import { Col, Row, Skeleton } from "antd";
 import ProductBasketCard from "../ProductBasketCard/ProductBasketCard";
 
 function Cart() {
-  const { selectedProducts } = useSelector(
-    (state) => state.ProductBasket
-  );
+  const { selectedProducts, selectedProductsAmount } = useSelector((state) => state.ProductBasket);
 
   if (!selectedProducts.length) return <Skeleton />;
 
-  return (
-    <div>
-      <div>Cart Page.</div>
-      <Link to="/">Go Home</Link>
-      <div style={{ padding: "20px 80px" }}>
-        <Row justify="center" gutter={[160, 16]}>
-          {selectedProducts.map((item) => (
-            <Col
-              xs={24}
-              md={12}
-              lg={6}
-              key={item.id}
-              style={{ display: "flex", justifyContent: "center" }}
-            >
-              <ProductBasketCard item={item} />
-            </Col>
-          ))}
-        </Row>
-      </div>
-    </div>
-  );
+  return selectedProducts.map((item) => (
+    <Row key={item.id} style={{marginBottom: 20, borderBottom: '1px solid #ccc', padding: 10}}>
+      <Col xs={24} md={8}>
+        <img src={item.image} with={250} height={250} />
+      </Col>
+      <Col
+        xs={24}
+        md={16}
+        style={{textAlign: 'left', paddingLeft: 50}}
+      >
+        <h2>{item.title}</h2>
+        <p>{item.description}</p>
+        <p> Amount: {selectedProductsAmount[item.id]}</p>
+        <p> Price: <b>$</b>{item.price}</p>
+      </Col>
+    </Row>
+  ));
 }
-
 export default Cart;
