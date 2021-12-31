@@ -2,39 +2,46 @@ import actionTypes from "../actionTypes";
 
 const initialState = {
   selectedProducts: [],
-  selectedProductsAmount: {}
+  selectedProductsAmount: {},
 };
 
 export const ProductBasketReducer = (state = initialState, action) => {
+  // const { id:idx } = action.payload;
+
   switch (action.type) {
     case actionTypes.ADD_TO_BASKET:
-      const {data, index} = action.payload;
-      if (state.selectedProductsAmount[index])
+    // let { id } = action.payload;
+
+      if (state.selectedProductsAmount[action.payload.id])
         return {
           ...state,
-          selectedProductsAmount: {...state.selectedProductsAmount, [index]: state.selectedProductsAmount[index]+1},
+          selectedProductsAmount: {
+            ...state.selectedProductsAmount,
+            [action.payload.id]: state.selectedProductsAmount[action.payload.id] + 1,
+          },
         };
       else
         return {
           ...state,
-          selectedProducts: [...state.selectedProducts, data],
-          selectedProductsAmount: {...state.selectedProductsAmount, [index]: 1}
-        }
+          selectedProducts: [...state.selectedProducts, action.payload],
+          selectedProductsAmount: { ...state.selectedProductsAmount, [action.payload.id]: 1 },
+        };
 
     case actionTypes.REMOVE_FROM_BASKET:
+      const newProductsAmount = {...state.selectedProductsAmount };
+      delete newProductsAmount[action.payload.id];
       return {
         ...state,
         selectedProducts: state.selectedProducts.filter(
           (item) => item.id !== action.payload.id
         ),
+        selectedProductsAmount: newProductsAmount
       };
-
+      
     default:
       return state;
   }
 };
-
-
 
 // ==========================================================================================
 // if (state.selectedProductsAmount[index])

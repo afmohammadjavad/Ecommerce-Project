@@ -15,12 +15,12 @@ function ProductCard({ item }) {
       <Card
         hoverable
         style={{ width: 240 }}
-        cover={<img alt="example" src={item.data.image} with='100' height='200' />}
+        cover={<img alt="example" src={item.image} with='100' height='200' />}
         actions={[
           <Button type="primary" onClick={() => dispatch({type: actionTypes.ADD_TO_BASKET, payload: item})}>Add to Cart</Button>,
         ]}
       >
-        <Meta title={item.data.title} description={item.data.price} />
+        <Meta title={item.title} description={item.price} />
       </Card>
     </div>
   );
