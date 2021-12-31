@@ -4,5 +4,5 @@ import { ProductBasketReducer } from "./productsBasket/productBasketReducer";
 
 export default combineReducers({
   products: ProductsReducer,
-  ProductBasketReducer,
+  ProductBasket: ProductBasketReducer,
 });
