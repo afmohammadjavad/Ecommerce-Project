@@ -37,7 +37,7 @@ function Cart() {
         }}
       >
         <Col xs={24} md={8}>
-          <img src={item.image} with={250} height={250} alt="" />
+          <img src={item.image} width={250} height={250} alt="" />
         </Col>
         <Col xs={24} md={16} style={{ textAlign: "left", paddingLeft: 50 }}>
           <h2>{item.title}</h2>
