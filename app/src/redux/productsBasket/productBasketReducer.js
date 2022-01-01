@@ -10,7 +10,7 @@ export const ProductBasketReducer = (state = initialState, action) => {
 
   switch (action.type) {
     case actionTypes.ADD_TO_BASKET:
-      if (state.selectedProductsAmount[id])
+      if (state.selectedProductsAmount[id] >= 0)
         return {
           ...state,
           selectedProductsAmount: {
@@ -25,17 +25,28 @@ export const ProductBasketReducer = (state = initialState, action) => {
           selectedProductsAmount: { ...state.selectedProductsAmount, [id]: 1 },
         };
 
+    case actionTypes.DECREASE_FROM_BASKET:
+      if (state.selectedProductsAmount[id])
+        return {
+          ...state,
+          selectedProductsAmount: {
+            ...state.selectedProductsAmount,
+            [id]: state.selectedProductsAmount[id] - 1,
+          },
+        };
+      else return state;
+
     case actionTypes.REMOVE_FROM_BASKET:
-      const newProductsAmount = {...state.selectedProductsAmount };
+      const newProductsAmount = { ...state.selectedProductsAmount };
       delete newProductsAmount[id];
       return {
         ...state,
         selectedProducts: state.selectedProducts.filter(
           (item) => item.id !== id
         ),
-        selectedProductsAmount: newProductsAmount
+        selectedProductsAmount: newProductsAmount,
       };
-      
+
     default:
       return state;
   }

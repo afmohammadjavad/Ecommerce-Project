@@ -39,10 +39,10 @@ function Header() {
 
   return (
     <div className="header">
-      <Link to="/">Home</Link>
-      <Popover title="selected products" content={content} trigger="click">
-        <Badge count={allCount}>
-          <ShoppingCartOutlined style={{ fontSize: 24, cursor: "pointer" }} />
+      <Link to="/" style={{color: '#fff', fontWeight: "bold"}}>Home</Link>
+      <Popover placement="bottom" title="selected products" content={content} trigger="click">
+        <Badge count={allCount} style={{cursor: 'pointer'}}>
+          <ShoppingCartOutlined style={{ fontSize: 24, cursor: "pointer", color: '#fff' }} />
         </Badge>
       </Popover>
     </div>

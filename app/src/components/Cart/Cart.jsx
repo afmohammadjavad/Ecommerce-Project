@@ -9,7 +9,8 @@ function Cart() {
 
   const { selectedProducts, selectedProductsAmount } = useSelector((state) => state.ProductBasket);
 
-  if (!selectedProducts.length) return <Skeleton />;
+  if (!selectedProducts.length) return <h1>Cart is Empty</h1>;
+  // if (!selectedProducts.length) return <Skeleton />;
 
   let totalPrice = 0;
   for (let item of selectedProducts) {
@@ -21,14 +22,14 @@ function Cart() {
   }
   
   const decrease = (item) => {
-    dispatch({type: actionTypes.ADD_TO_BASKET, payload: item})
+    dispatch({type: actionTypes.DECREASE_FROM_BASKET, payload: item})
   }
 
   const listToShow = () => {
     return selectedProducts.map((item) => (
       <Row key={item.id} style={{marginBottom: 20, borderBottom: '1px solid #ccc', padding: 10}}>
         <Col xs={24} md={8}>
-          <img src={item.image} with={250} height={250} />
+          <img src={item.image} with={250} height={250} alt="" />
         </Col>
         <Col
           xs={24}
@@ -43,6 +44,7 @@ function Cart() {
             <span style={{marginLeft: 10}}><Button onClick={() => decrease(item)} type="primary" size="small" shape="circle">-</Button></span>
           </div>
           <p> Price: <b>$</b>{item.price}</p>
+          <Button type="danger" onClick={() => dispatch({type: actionTypes.REMOVE_FROM_BASKET, payload: item})}>Delete</Button>
         </Col>
       </Row>
     ));
