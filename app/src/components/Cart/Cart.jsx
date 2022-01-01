@@ -4,10 +4,11 @@ import { useDispatch } from "react-redux";
 import actionTypes from "../../redux/actionTypes";
 
 function Cart() {
+  const dispatch = useDispatch();
 
-  const dispatch = useDispatch()
-
-  const { selectedProducts, selectedProductsAmount } = useSelector((state) => state.ProductBasket);
+  const { selectedProducts, selectedProductsAmount } = useSelector(
+    (state) => state.ProductBasket
+  );
 
   if (!selectedProducts.length) return <h1>Cart is Empty</h1>;
   // if (!selectedProducts.length) return <Skeleton />;
@@ -18,43 +19,78 @@ function Cart() {
   }
 
   const increase = (item) => {
-    dispatch({type: actionTypes.ADD_TO_BASKET, payload: item})
-  }
-  
+    dispatch({ type: actionTypes.ADD_TO_BASKET, payload: item });
+  };
+
   const decrease = (item) => {
-    dispatch({type: actionTypes.DECREASE_FROM_BASKET, payload: item})
-  }
+    dispatch({ type: actionTypes.DECREASE_FROM_BASKET, payload: item });
+  };
 
   const listToShow = () => {
     return selectedProducts.map((item) => (
-      <Row key={item.id} style={{marginBottom: 20, borderBottom: '1px solid #ccc', padding: 10}}>
+      <Row
+        key={item.id}
+        style={{
+          marginBottom: 20,
+          borderBottom: "1px solid #ccc",
+          padding: 10,
+        }}
+      >
         <Col xs={24} md={8}>
           <img src={item.image} with={250} height={250} alt="" />
         </Col>
-        <Col
-          xs={24}
-          md={16}
-          style={{textAlign: 'left', paddingLeft: 50}}
-        >
+        <Col xs={24} md={16} style={{ textAlign: "left", paddingLeft: 50 }}>
           <h2>{item.title}</h2>
           <p>{item.description}</p>
           <div>
             <span> Amount: {selectedProductsAmount[item.id]}</span>
-            <span style={{marginLeft: 10}}><Button onClick={() => increase(item)} type="primary" size="small" shape="circle">+</Button></span>
-            <span style={{marginLeft: 10}}><Button onClick={() => decrease(item)} type="primary" size="small" shape="circle">-</Button></span>
+            <span style={{ marginLeft: 10 }}>
+              <Button
+                onClick={() => increase(item)}
+                type="primary"
+                size="small"
+                shape="circle"
+              >
+                +
+              </Button>
+            </span>
+            <span style={{ marginLeft: 10 }}>
+              <Button
+                onClick={() => decrease(item)}
+                type="primary"
+                size="small"
+                shape="circle"
+                disabled={selectedProductsAmount[item.id] ? false: true}
+              >
+                -
+              </Button>
+            </span>
           </div>
-          <p> Price: <b>$</b>{item.price}</p>
-          <Button type="danger" onClick={() => dispatch({type: actionTypes.REMOVE_FROM_BASKET, payload: item})}>Delete</Button>
+          <p>
+            {" "}
+            Price: <b>$</b>
+            {item.price}
+          </p>
+          <Button
+            type="danger"
+            onClick={() =>
+              dispatch({ type: actionTypes.REMOVE_FROM_BASKET, payload: item })
+            }
+          >
+            Delete
+          </Button>
         </Col>
       </Row>
     ));
-  }
+  };
 
   return (
     <>
       {listToShow()}
-      <h2 style={{paddingBottom: 20}}>Total Price: ${totalPrice.toFixed(2)}</h2>
+      <h2 style={{ paddingBottom: 20 }}>
+        Total Price: ${totalPrice.toFixed(2)}
+      </h2>
     </>
-  )
+  );
 }
 export default Cart;
