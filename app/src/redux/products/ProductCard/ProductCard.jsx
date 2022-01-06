@@ -6,7 +6,7 @@ import actionTypes from '../../actionTypes';
 
 const { Meta } = Card;
 
-function ProductCard({ item }) {
+function ProductCard({ item, swiper }) {
 
   const dispatch = useDispatch()
 
@@ -17,7 +17,7 @@ function ProductCard({ item }) {
         style={{ width: 240 }}
         cover={<img alt="example" src={item.image} with='100' height='200' />}
         actions={[
-          <Button type="primary" onClick={() => dispatch({type: actionTypes.ADD_TO_BASKET, payload: item})}>Add to Cart</Button>,
+          (!swiper && <Button type="primary" onClick={() => dispatch({type: actionTypes.ADD_TO_BASKET, payload: item})}>Add to Cart</Button>),
         ]}
       >
         <Meta title={item.title} description={item.price} />

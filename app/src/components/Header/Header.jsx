@@ -44,6 +44,9 @@ function Header() {
       <Link to="/" style={{ color: "#fff", fontWeight: "bold" }}>
         Home
       </Link>
+      <Link to="/dashboard" style={{ color: "#fff", fontWeight: "bold" }}>
+        Dashboard
+      </Link>
       <Popover
         placement="bottomLeft"
         title="selected products"

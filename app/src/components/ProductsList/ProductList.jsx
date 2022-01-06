@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { Col, Row, Skeleton } from "antd";
 import productsActions from "../../redux/products/productsActions";
 import ProductCard from "../../redux/products/ProductCard/ProductCard";
+import MySwiper from "../Swiper/Swiper";
 
 function ProductList() {
   const dispatch = useDispatch();
@@ -19,6 +20,7 @@ function ProductList() {
   if (data.length) {
     return (
       <div style={{padding: '20px 80px'}}>
+        <MySwiper data={data} />
         <Row justify="center" gutter={[160, 16]}>
           {data.map((item) => (
             <Col xs={24} md={12} lg={6} key={item.id} style={{display: 'flex', justifyContent: 'center'}}>
