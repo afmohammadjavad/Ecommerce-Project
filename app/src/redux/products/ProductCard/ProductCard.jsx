@@ -16,8 +16,8 @@ function ProductCard({ item, swiper }) {
         hoverable
         style={{ width: 240 }}
         cover={<img alt="example" src={item.image} with='100' height='200' />}
-        actions={[
-          (!swiper && <Button type="primary" onClick={() => dispatch({type: actionTypes.ADD_TO_BASKET, payload: item})}>Add to Cart</Button>),
+        actions={!swiper &&[
+           <Button type="primary" onClick={() => dispatch({type: actionTypes.ADD_TO_BASKET, payload: item})}>Add to Cart</Button>,
         ]}
       >
         <Meta title={item.title} description={item.price} />

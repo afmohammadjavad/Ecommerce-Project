@@ -10,14 +10,15 @@ const MySwiper =  ({data}) => {
 
   return (
     <Swiper
+      style={{paddingBottom: 20, marginBottom: 20, borderBottom: '1px solid #ccc'}}
       spaceBetween={50}
       slidesPerView={3}
       onSlideChange={() => console.log('slide change')}
-      onSwiper={(swiper) => console.log(swiper)}
+      // onSwiper={(swiper) => console.log(swiper)}
     >
       {
         newData.map(item => (
-          <SwiperSlide>
+          <SwiperSlide key={item.id}>
             <ProductCard item={item} swiper />
           </SwiperSlide>
         ))

@@ -3,6 +3,7 @@ import "./Header.scss";
 import { ShoppingCartOutlined } from "@ant-design/icons";
 import { Badge, Button, Popover } from "antd";
 import { useSelector } from "react-redux";
+import Categories from "../Categories/Categories";
 
 function Header() {
   const { selectedProducts, selectedProductsAmount } = useSelector(
@@ -44,6 +45,7 @@ function Header() {
       <Link to="/" style={{ color: "#fff", fontWeight: "bold" }}>
         Home
       </Link>
+      <Categories />
       <Link to="/dashboard" style={{ color: "#fff", fontWeight: "bold" }}>
         Dashboard
       </Link>
