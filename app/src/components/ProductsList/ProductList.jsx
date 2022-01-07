@@ -10,7 +10,8 @@ function ProductList() {
   const { loading, data, error } = useSelector((state) => state.products);
 
   useEffect(() => {
-    dispatch(productsActions.getProducts());
+    if (!data.length)
+      dispatch(productsActions.getProducts());
   }, []);
 
   if (loading || !data.length) return <Skeleton />;
