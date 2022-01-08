@@ -40,13 +40,27 @@ function Header() {
     allCount += selectedProductsAmount[key];
   }
 
+  const colors = {
+    primary: "white",
+    hover: "#2cdcff",
+    press: "#03aacc",
+  };
+
+  const styles = {
+    color: colors.primary,
+    fontWeight: "bold",
+    // marginLeft: 20,
+    textShadow: "0px 6px 5px black",
+  };
+
   return (
     <div className="header">
-      <Link to="/" style={{ color: "#fff", fontWeight: "bold" }}>
+      
+      <Link to="/" style={styles}>
         Home
       </Link>
       <Categories />
-      <Link to="/dashboard" style={{ color: "#fff", fontWeight: "bold" }}>
+      <Link to="/dashboard" style={styles}>
         Dashboard
       </Link>
       <Popover
@@ -55,9 +69,9 @@ function Header() {
         content={content}
         trigger="click"
       >
-        <Badge count={allCount} style={{ cursor: "pointer" }}>
+        <Badge count={allCount} style={{ ...styles, cursor: "pointer", marginLeft: 100 }}>
           <ShoppingCartOutlined
-            style={{ fontSize: 24, cursor: "pointer", color: "#fff" }}
+            style={{...styles, fontSize: 24, cursor: "pointer"}}
           />
         </Badge>
       </Popover>
