@@ -69,9 +69,9 @@ function Header() {
         content={content}
         trigger="click"
       >
-        <Badge count={allCount} style={{ ...styles, cursor: "pointer", marginLeft: 100 }}>
+        <Badge count={allCount} style={{ ...styles, cursor: "pointer" }}>
           <ShoppingCartOutlined
-            style={{...styles, fontSize: 24, cursor: "pointer"}}
+            style={{...styles, fontSize: 24, cursor: "pointer", paddingRight: 20}}
           />
         </Badge>
       </Popover>

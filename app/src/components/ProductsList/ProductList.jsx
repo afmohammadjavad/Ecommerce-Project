@@ -20,7 +20,7 @@ function ProductList() {
 
   if (data.length) {
     return (
-      <div style={{padding: '20px 80px'}}>
+      <div style={{padding: '35px 80px'}}>
         <MySwiper data={data} />
         <Row justify="center" gutter={[160, 16]}>
           {data.map((item) => (

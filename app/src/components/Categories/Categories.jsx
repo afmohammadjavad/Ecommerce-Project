@@ -53,7 +53,7 @@ function Categories() {
 
   if (data.length) {
     return (
-      <div>
+      <div style={{margin:'0 -40px'}}>
         <Row justify="center" gutter={[10, 10]}>
         {data.map((item, index) => (
           <Col xs={12} md={6} lg={6} style={{display: 'flex', justifyContent: 'center'}}>
