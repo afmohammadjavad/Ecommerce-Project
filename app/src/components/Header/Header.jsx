@@ -5,6 +5,7 @@ import { Badge, Button, Row, Col, Popover } from "antd";
 import { useSelector } from "react-redux";
 import Categories from "../Categories/Categories";
 import styled from "styled-components";
+import produce from "immer";
 
 function Header() {
   const { selectedProducts, selectedProductsAmount } = useSelector(
@@ -19,27 +20,36 @@ function Header() {
   };
   //*=========================
   const baseStyle = {
-    transition: '500ms',
+    transition: "500ms",
     color: colors.primary,
-    cursor: 'pointer',
-    fontSize: 16,
-    fontWeight: 'bold',
-    '&:hover': {
-      transition: '500ms',
+    cursor: "pointer",
+    fontSize: 18,
+    fontWeight: "bold",
+    textShadow: "0px 6px 5px black",
+    "&:hover": {
+      transition: "500ms",
       color: colors.hover,
       fontSize: 20,
     },
-    '&:active': {
+    "&:active": {
       color: colors.press,
-    }
-  }
+    },
+  };
+
   //? Style Components with Styled-Components===================
-    const MyShoppingCartOutlined = styled(ShoppingCartOutlined)({...baseStyle, fontSize: 24, '&:hover': { ...baseStyle['&:hover'], fontSize: 30}})
-  //? ==========================================================
- 
-  //? Style Components with Styled-Components===================
-  const MyLink = styled(Link)(baseStyle)
+  const MyLink = styled(Link)(baseStyle);
   //?============================================================
+
+  //? Style Components with Styled-Components===================
+  const MyShoppingCartOutlined = styled(ShoppingCartOutlined)(
+    produce(baseStyle, (draft) => {
+      draft.fontSize = 30;
+      draft["&:hover"].fontSize = 35;
+    })
+    //# Without Using Immer Library.
+    //# {...baseStyle, fontSize: 24, '&:hover': { ...baseStyle['&:hover'], fontSize: 30}}
+  );
+  //? ==========================================================
 
   const content = (
     <div>
@@ -72,60 +82,19 @@ function Header() {
     allCount += selectedProductsAmount[key];
   }
 
-  //* Event handlers=====================================================
-  // const colors = {
-  //   primary: "white",
-  //   hover: "#2cdcff",
-  //   press: "#03aacc",
-  // };
-
-  const styles = {
-    color: colors.primary,
-    fontWeight: "bold",
-    fontSize: 16,
-    // marginLeft: 20,
-    textShadow: "0px 6px 5px black",
-  };
-
-  const onMouseHover = (e) => {
-    if (e.type === "mouseenter") e.target.style.color = colors.hover;
-    else if (e.type === "mouseleave") e.target.style.color = colors.primary;
-  };
-
-  const onMousePress = (e) => {
-    if (e.type === "mousedown") e.target.style.color = colors.press;
-    else e.target.style.color = colors.hover;
-  };
-
-  const MouseEvents = {
-    onMouseEnter: onMouseHover,
-    onMouseLeave: onMouseHover,
-    onMouseUp: onMousePress,
-    onMouseDown: onMousePress,
-  };
-  //! Event handlers=====================================================
-
   return (
     <div className="header">
-      <Row gutter={[{xs: 5, md: 10, lg: 20}, 10]}>
-        <Col xs={{span:8, order:1}} lg={{span:3, order:1}}>
-          <span>
-            <MyLink to="/" className="color" style={styles} {...MouseEvents}>
-              Home
-            </MyLink>
-          </span>
+      <Row gutter={[{ xs: 5, md: 10, lg: 20 }, 10]}>
+        <Col xs={{ span: 8, order: 1 }} lg={{ span: 3, order: 1 }}>
+          <MyLink to="/">Home</MyLink>
         </Col>
-        <Col xs={{span:24, order:4}} lg={{span:13, order:2}}>
+        <Col xs={{ span: 24, order: 4 }} lg={{ span: 13, order: 2 }}>
           <Categories Link={MyLink} />
         </Col>
-        <Col xs={{span:8, order:2}} lg={{span:3, order:2}}>
-          <span>
-            <MyLink to="/dashboard" style={styles} {...MouseEvents}>
-              Dashboard
-            </MyLink>
-          </span>
+        <Col xs={{ span: 8, order: 2 }} lg={{ span: 3, order: 2 }}>
+          <MyLink to="/dashboard">Dashboard</MyLink>
         </Col>
-        <Col xs={{span:8, order:3}} lg={{span:5, order:3}}>
+        <Col xs={{ span: 8, order: 3 }} lg={{ span: 5, order: 3 }}>
           <Popover
             placement="bottomLeft"
             title="selected products"
@@ -133,10 +102,7 @@ function Header() {
             trigger="click"
           >
             <Badge count={allCount} style={{ cursor: "pointer" }}>
-              <span>
-                <MyShoppingCartOutlined
-                />
-              </span>
+              <MyShoppingCartOutlined />
             </Badge>
           </Popover>
         </Col>

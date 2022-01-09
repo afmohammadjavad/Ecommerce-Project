@@ -17,17 +17,3 @@
   width: 100vw;
   z-index: 1000;
 }
-
-.color {
-  transition: 500ms;
-  color: white;
-  font-weight: bold;
-  font-size: 16;
-  text-shadow: 0px 6px 5px black;
-}
-
-.color:hover {
-  color: "#2cdcff";
-  transform: scale(150%);
-  transition: all 500ms ease;
-}
