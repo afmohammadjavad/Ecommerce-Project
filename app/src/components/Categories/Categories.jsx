@@ -53,15 +53,15 @@ function Categories() {
 
   if (data.length) {
     return (
-      <div style={{margin:'0 -40px'}}>
-        <Row justify="center" gutter={[10, 10]}>
+      <div >
+        <Row>
         {data.map((item, index) => (
-          <Col xs={12} md={6} lg={6} style={{display: 'flex', justifyContent: 'center'}}>
-            <span key={index}>
-              <Link to={`category/${item}`} style={styles} {...MouseEvents}>
-                {item}
-              </Link>
-            </span>
+          <Col key={index} flex='auto' >
+              <span>
+                <Link to={`category/${item}`} className="color" style={{...styles, fontSize: 16}} {...MouseEvents}>
+                  {item}
+                </Link>
+              </span>
           </Col>
         ))}
         </Row>

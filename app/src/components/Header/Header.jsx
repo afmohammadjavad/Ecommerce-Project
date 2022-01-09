@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import "./Header.scss";
 import { ShoppingCartOutlined } from "@ant-design/icons";
-import { Badge, Button, Popover } from "antd";
+import { Badge, Button, Row, Col, Popover } from "antd";
 import { useSelector } from "react-redux";
 import Categories from "../Categories/Categories";
 
@@ -40,6 +40,7 @@ function Header() {
     allCount += selectedProductsAmount[key];
   }
 
+  //* Event handlers=====================================================
   const colors = {
     primary: "white",
     hover: "#2cdcff",
@@ -49,32 +50,66 @@ function Header() {
   const styles = {
     color: colors.primary,
     fontWeight: "bold",
+    fontSize: 16,
     // marginLeft: 20,
     textShadow: "0px 6px 5px black",
   };
 
+  const onMouseHover = (e) => {
+    if (e.type === "mouseenter") e.target.style.color = colors.hover;
+    else if (e.type === "mouseleave") e.target.style.color = colors.primary;
+  };
+
+  const onMousePress = (e) => {
+    if (e.type === "mousedown") e.target.style.color = colors.press;
+    else e.target.style.color = colors.hover;
+  };
+
+  const MouseEvents = {
+    onMouseEnter: onMouseHover,
+    onMouseLeave: onMouseHover,
+    onMouseUp: onMousePress,
+    onMouseDown: onMousePress,
+  };
+  //! Event handlers=====================================================
+
   return (
     <div className="header">
-      
-      <Link to="/" style={styles}>
-        Home
-      </Link>
-      <Categories />
-      <Link to="/dashboard" style={styles}>
-        Dashboard
-      </Link>
-      <Popover
-        placement="bottomLeft"
-        title="selected products"
-        content={content}
-        trigger="click"
-      >
-        <Badge count={allCount} style={{ ...styles, cursor: "pointer" }}>
-          <ShoppingCartOutlined
-            style={{...styles, fontSize: 24, cursor: "pointer", paddingRight: 20}}
-          />
-        </Badge>
-      </Popover>
+      <Row gutter={[{xs: 5, md: 10, lg: 20}, 10]}>
+        <Col xs={{span:8, order:1}} lg={{span:3, order:1}}>
+          <span>
+            <Link to="/" className="color" style={styles} {...MouseEvents}>
+              Home
+            </Link>
+          </span>
+        </Col>
+        <Col xs={{span:24, order:4}} lg={{span:13, order:2}}>
+          <Categories />
+        </Col>
+        <Col xs={{span:8, order:2}} lg={{span:3, order:2}}>
+          <span>
+            <Link to="/dashboard" style={styles} {...MouseEvents}>
+              Dashboard
+            </Link>
+          </span>
+        </Col>
+        <Col xs={{span:8, order:3}} lg={{span:5, order:3}}>
+          <Popover
+            placement="bottomLeft"
+            title="selected products"
+            content={content}
+            trigger="click"
+          >
+            <Badge count={allCount} className="color" style={{ cursor: "pointer" }}>
+              <span>
+                <ShoppingCartOutlined
+                style={{color: 'white', fontSize: 24, cursor: "pointer" }}
+                />
+              </span>
+            </Badge>
+          </Popover>
+        </Col>
+      </Row>
     </div>
   );
 }
