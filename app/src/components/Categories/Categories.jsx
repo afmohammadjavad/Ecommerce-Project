@@ -3,10 +3,11 @@ import { useDispatch, useSelector } from "react-redux";
 import { LoadingOutlined } from "@ant-design/icons";
 // import {SassColor, SassFunction} from 'sass'
 import categoriesActions from "../../redux/categories/categoriesActions";
-import { Link } from "react-router-dom";
+// import { Link } from "react-router-dom";
 import { Col, Row } from "antd";
+import styled from "styled-components";
 
-function Categories() {
+function Categories({Link}) {
   const dispatch = useDispatch();
   const { loading, data, error } = useSelector((state) => state.categories);
 
@@ -14,34 +15,15 @@ function Categories() {
     if (!data.length) dispatch(categoriesActions.getCategories());
   }, []);
 
-  //* Event handlers=====================================================
-  const colors = {
-    primary: "white",
-    hover: "#2cdcff",
-    press: "#03aacc",
-  };
-  const onMouseHover = (e) => {
-    if (e.type === "mouseenter") e.target.style.color = colors.hover;
-    else if (e.type === "mouseleave") e.target.style.color = colors.primary;
-  };
-
-  const onMousePress = (e) => {
-    if (e.type === "mousedown") e.target.style.color = colors.press;
-    else e.target.style.color = colors.hover;
-  };
-
-  const MouseEvents = {
-    onMouseEnter: onMouseHover,
-    onMouseLeave: onMouseHover,
-    onMouseUp: onMousePress,
-    onMouseDown: onMousePress,
-  };
-  //! Event handlers=====================================================
+  const Temp = styled(Link)`
+    &:hover {
+      font-size: 20px
+    }
+  `;
 
   const styles = {
-    color: colors.primary,
+    // fontSize: 16,
     fontWeight: "bold",
-    // marginLeft: 20,
     textShadow: "0px 6px 5px black",
   };
 
@@ -58,9 +40,9 @@ function Categories() {
         {data.map((item, index) => (
           <Col key={index} flex='auto' >
               <span>
-                <Link to={`category/${item}`} className="color" style={{...styles, fontSize: 16}} {...MouseEvents}>
+                <Temp to={`category/${item}`} style={styles}>
                   {item}
-                </Link>
+                </Temp>
               </span>
           </Col>
         ))}

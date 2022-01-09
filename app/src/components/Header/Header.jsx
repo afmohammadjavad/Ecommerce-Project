@@ -4,11 +4,43 @@ import { ShoppingCartOutlined } from "@ant-design/icons";
 import { Badge, Button, Row, Col, Popover } from "antd";
 import { useSelector } from "react-redux";
 import Categories from "../Categories/Categories";
+import styled from "styled-components";
 
 function Header() {
   const { selectedProducts, selectedProductsAmount } = useSelector(
     (state) => state.ProductBasket
   );
+
+  //*=========================
+  const colors = {
+    primary: "white",
+    hover: "#2cdcff",
+    press: "#03aacc",
+  };
+  //*=========================
+  const baseStyle = {
+    transition: '500ms',
+    color: colors.primary,
+    cursor: 'pointer',
+    fontSize: 16,
+    fontWeight: 'bold',
+    '&:hover': {
+      transition: '500ms',
+      color: colors.hover,
+      fontSize: 20,
+    },
+    '&:active': {
+      color: colors.press,
+    }
+  }
+  //? Style Components with Styled-Components===================
+    const MyShoppingCartOutlined = styled(ShoppingCartOutlined)({...baseStyle, fontSize: 24, '&:hover': { ...baseStyle['&:hover'], fontSize: 30}})
+  //? ==========================================================
+ 
+  //? Style Components with Styled-Components===================
+  const MyLink = styled(Link)(baseStyle)
+  //?============================================================
+
   const content = (
     <div>
       {selectedProducts.map((item) => (
@@ -41,11 +73,11 @@ function Header() {
   }
 
   //* Event handlers=====================================================
-  const colors = {
-    primary: "white",
-    hover: "#2cdcff",
-    press: "#03aacc",
-  };
+  // const colors = {
+  //   primary: "white",
+  //   hover: "#2cdcff",
+  //   press: "#03aacc",
+  // };
 
   const styles = {
     color: colors.primary,
@@ -78,19 +110,19 @@ function Header() {
       <Row gutter={[{xs: 5, md: 10, lg: 20}, 10]}>
         <Col xs={{span:8, order:1}} lg={{span:3, order:1}}>
           <span>
-            <Link to="/" className="color" style={styles} {...MouseEvents}>
+            <MyLink to="/" className="color" style={styles} {...MouseEvents}>
               Home
-            </Link>
+            </MyLink>
           </span>
         </Col>
         <Col xs={{span:24, order:4}} lg={{span:13, order:2}}>
-          <Categories />
+          <Categories Link={MyLink} />
         </Col>
         <Col xs={{span:8, order:2}} lg={{span:3, order:2}}>
           <span>
-            <Link to="/dashboard" style={styles} {...MouseEvents}>
+            <MyLink to="/dashboard" style={styles} {...MouseEvents}>
               Dashboard
-            </Link>
+            </MyLink>
           </span>
         </Col>
         <Col xs={{span:8, order:3}} lg={{span:5, order:3}}>
@@ -100,10 +132,9 @@ function Header() {
             content={content}
             trigger="click"
           >
-            <Badge count={allCount} className="color" style={{ cursor: "pointer" }}>
+            <Badge count={allCount} style={{ cursor: "pointer" }}>
               <span>
-                <ShoppingCartOutlined
-                style={{color: 'white', fontSize: 24, cursor: "pointer" }}
+                <MyShoppingCartOutlined
                 />
               </span>
             </Badge>
