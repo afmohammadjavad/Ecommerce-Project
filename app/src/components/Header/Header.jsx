@@ -6,6 +6,7 @@ import { useSelector } from "react-redux";
 import Categories from "../Categories/Categories";
 import styled from "styled-components";
 import produce from "immer";
+import { ProjectName } from 'baseUrl';
 
 function Header() {
   const { selectedProducts, selectedProductsAmount } = useSelector(
@@ -71,7 +72,7 @@ function Header() {
           </span>
         </div>
       ))}
-      <Link to="cart">
+      <Link to={`/${ProjectName}/cart`}>
         <Button type="primary">Buy</Button>
       </Link>
     </div>
@@ -86,13 +87,13 @@ function Header() {
     <div className="header">
       <Row gutter={[{ xs: 5, md: 10, lg: 20 }, 10]}>
         <Col xs={{ span: 8, order: 1 }} lg={{ span: 3, order: 1 }}>
-          <MyLink to="/">Home</MyLink>
+          <MyLink to={`/${ProjectName}`}>Home</MyLink>
         </Col>
         <Col xs={{ span: 24, order: 4 }} lg={{ span: 13, order: 2 }}>
           <Categories Link={MyLink} />
         </Col>
         <Col xs={{ span: 8, order: 2 }} lg={{ span: 3, order: 2 }}>
-          <MyLink to="/dashboard">Dashboard</MyLink>
+          <MyLink to={`/${ProjectName}/dashboard`}>Dashboard</MyLink>
         </Col>
         <Col xs={{ span: 8, order: 3 }} lg={{ span: 5, order: 3 }}>
           <Popover

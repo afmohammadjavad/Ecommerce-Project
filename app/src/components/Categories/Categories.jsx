@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { LoadingOutlined } from "@ant-design/icons";
 import categoriesActions from "../../redux/categories/categoriesActions";
 import { Col, Row } from "antd";
+import { ProjectName } from 'baseUrl';
 
 function Categories({ Link }) {
   const dispatch = useDispatch();
@@ -25,7 +26,7 @@ function Categories({ Link }) {
           {data.map((item, index) => (
             <Col key={index} flex="auto">
               <span>
-                <Link to={`category/${item}`}>{item}</Link>
+                <Link to={`/${ProjectName}/category/${item}`}>{item}</Link>
               </span>
             </Col>
           ))}

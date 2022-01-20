@@ -5,6 +5,7 @@ import Category from "./components/Category/Category";
 import Dashboard from "./components/Dashboard/Dashboard";
 import Header from "./components/Header/Header";
 import ProductList from "./components/ProductsList/ProductList";
+import { ProjectName } from './baseUrl.js';
 
 function App() {
   return (
@@ -12,10 +13,10 @@ function App() {
       <Header />
       <div className="main" style={{paddingTop: 100}}>
         <Routes>
-          <Route path="/" element={<ProductList />} />
-          <Route path="cart" element={<Cart />} />
-          <Route path="dashboard" element={<Dashboard />} />
-          <Route path={`category/:categoryName`} element={<Category />} />
+          <Route path={`/${ProjectName}`} element={<ProductList />} />
+          <Route path={`/${ProjectName}/cart`} element={<Cart />} />
+          <Route path={`/${ProjectName}/dashboard`} element={<Dashboard />} />
+          <Route path={`/${ProjectName}/category/:categoryName`} element={<Category />} />
         </Routes>
       </div>
     </div>
