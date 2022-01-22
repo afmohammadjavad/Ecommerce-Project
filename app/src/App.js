@@ -1,5 +1,6 @@
 import { Route, Routes } from "react-router-dom";
 import "./App.css";
+import './Main.scss'
 import Cart from "./components/Cart/Cart";
 import Category from "./components/Category/Category";
 import Dashboard from "./components/Dashboard/Dashboard";
@@ -11,7 +12,7 @@ function App() {
   return (
     <div className="App">
       <Header />
-      <div className="main" style={{paddingTop: 100}}>
+      <div className="main">
         <Routes>
           <Route path={`/${ProjectName}`} element={<ProductList />} />
           <Route path={`/${ProjectName}/cart`} element={<Cart />} />

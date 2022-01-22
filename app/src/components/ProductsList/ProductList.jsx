@@ -24,7 +24,7 @@ function ProductList() {
         <Swiper data={data} />
         <Row justify="center" gutter={[160, 16]}>
           {data.map((item) => (
-            <Col xs={24} md={12} lg={6} key={item.id} style={{display: 'flex', justifyContent: 'center'}}>
+            <Col xs={24} sm={12} md={8} lg={6} key={item.id} style={{display: 'flex', justifyContent: 'center'}}>
               <ProductCard item={item} />
             </Col>
           ))}

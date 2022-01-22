@@ -1,0 +1,13 @@
+.categories {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  @media screen and (max-width: 992px) {
+    justify-content: space-evenly;
+  }
+  span {
+    @media screen and (max-width: 576px) {
+      flex-basis: 50%;
+    }
+  }
+}
